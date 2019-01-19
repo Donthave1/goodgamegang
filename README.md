@@ -1,7 +1,7 @@
 # Project 3: Facial Expression Classification
 
 Ever wonder how powerful Machine Learning is?
-![alt text](https://raw.githubusercontent.com/Donthave1/goodgamegang/master/images/frostmournehunger.png)
+![alt text](https://github.com/Donthave1/goodgamegang/blob/master/images/fmh.png)
 
 # [Site]()
 
