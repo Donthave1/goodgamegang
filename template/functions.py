@@ -12,8 +12,8 @@ def get_labels(dataset):
     return {0: 'angry', 1: 'disgust', 2: 'fear', 3: 'happy', 4: 'sad', 5: 'surprise', 6: 'neutral'}
 
 def load_data(self):
-        image_size=(48, 48)
-        data = pd.read_csv('/datasets/fer2013.csv')
+        image_size = (48, 48)
+        data = pd.read_csv('datasets/fer2013.csv')
         pixels = data['pixels'].tolist()
         width, height = 48, 48
         faces = []
@@ -28,9 +28,7 @@ def load_data(self):
         return faces, emotions
 
 
-def load_detection_model(model_path):
-    detection_model = cv2.CascadeClassifier(model_path)
-    return detection_model
+
 
 
 def detect_faces(detection_model, gray_image_array):
@@ -49,8 +47,8 @@ def draw_bounding_box(face_coordinates, image_array, color):
     cv2.rectangle(image_array, (x, y), (x + w, y + h), color, 2)
 
 
-def apply_offsets(face_coordinates, offsets):
-    x, y, width, height = face_coordinates
+def apply_offsets(face_coords, offsets):
+    x, y, width, height = face_coords
     x_off, y_off = offsets
     return (x - x_off, x + width + x_off, y - y_off, y + height + y_off)
 
