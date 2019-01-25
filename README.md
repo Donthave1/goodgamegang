@@ -36,23 +36,29 @@ So today, our team took up this challenge and we are planning to answer it with 
 ## 2 The Database
 The dataset that our model was trained on is from a [Kaggle Facial Expression Recognition Challenge (FER2013)](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge), which comprises a total of 35887 pre-cropped, 48-by-48-pixel grayscale images of faces each labeled with one of the 7 emotion classes: anger, disgust, fear, happiness, sadness, surprise, and neutral.
 
-![alt text]()
+![alt text](https://raw.githubusercontent.com/Donthave1/goodgamegang/master/images/relight.png)
 
 
 ## 3 The Pre-Trained Deep Learning Nerual Network Model
 Only using single layer of model to predict something complicated as human facial expression will be impossible to get any accurate result...  
 Deep learning is a most popular/accurate technique to apply in computer vision, and it is capable to solve more complex problem like the one we have here. So we found a convolutional neural network (CNN) layered train model as our fundation and to build upon. CNNs work like human brain synapes works when processing/analyzing information.  
 A typical architecture of a convolutional neural network contain an input layer, multiple convolutional layers, couple fully-connected dense layers, and one output layer.  
-![alt text]()  
-
+![alt text](https://raw.githubusercontent.com/Donthave1/goodgamegang/master/images/CNNs.png)  
 
 
 
 ## 4 Step of Validation
-
+1. How to detect faces via computer vision:
+2. How to identify the area to perform analysis on:
+3. Transformation on the video feedback:
+4. Predict (perform machine learning):
+5. Return result transform into visual
 
 ## 5 The Apps
-
+*TBD...*
+Hosting on Local machine using Flask  
+Hosting on Heroku  
+Hosting on AWS
 
 
 ## 6 About the Team
