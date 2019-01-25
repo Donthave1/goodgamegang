@@ -7,11 +7,6 @@
 
 By **Team GoodGameGang**  
 Edward Chen, Josh Shigaki, Peter Liu, Thomas Nakamoto
-  
-## The Real World Challenge: 
-Have you ever got into trouble because you can’t read emotion? Your significant other is feeling uncomfortable and sick when you continue to make fun of her; you’re telling an inappropriate joke next to your parents on grandma’s birthday celebration; you’re spilling out the deepest secret of your best friend in front of his significant other. I don’t know how you are still here alive, but for sure you had enough frustration in life. That is the reason you come to us! We built a emotion recognizer to read facial emotion spontaneously. You will no longer need to suffer from the punishment of not catching someone’s facial gesture and hints anymore!
-
-Using a web application hosted on Amazon Web Service to intake user image through a webcam. By passing in the image pixel to backend analyzer our pre-trained model is capable to detect user facial features. Furthermore, with the facial features recognized, our emotion recognition model will be able to analyze users’ emotion and respond with one of the seven different states: angry, disgust, fear, happy, sad, surprise, neutral.
 
 
 ## Table of Contents
@@ -55,7 +50,7 @@ A typical architecture of a convolutional neural network contain an input layer,
 5. Return result transform into visual
 
 ## 5 The Apps
-*TBD...*
+*TBD...*  
 Hosting on Local machine using Flask  
 Hosting on Heroku  
 Hosting on AWS
@@ -76,7 +71,7 @@ We are group of Data Analytic Bootcamp students that are passionate about using 
 
 4. [*"OpenCV facial detection pre-train model: Haar Cascades"*](https://docs.opencv.org/3.4.1/d7/d8b/tutorial_py_face_detection.html) by OpenCV documentation
 
-## 8 Tool Set
+## 8 Tool Sets
 **Python:** (Library: TensorFlow, OpenCV, Pandas, Numpy, Flask, SQLAlchemy)  
 **JavaScript:** (Library: Bootstrap, Gulp, nmp)   
 **Database:** AWS  
