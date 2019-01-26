@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, render_template, request, redirect
 
 import keras
 from keras.preprocessing import image
@@ -66,8 +66,11 @@ def prepare_image(img):
 
     return gray_face
 
+@app.route('/')
+def index_page():
+    return render_template("index.html")
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     data = {"success": False}
     if request.method == 'POST':
@@ -101,7 +104,7 @@ def upload_file():
 
                 # Use the model to make a prediction
                 predicted_digit = emotion_model.predict(image_array)[0]
-                data["prediction"] = str(predicted_digit)
+                data["probabilities of all outcomes"] = str(predicted_digit)
 
                 emotion_label_arg = np.argmax(predicted_digit)
                 data["final_prediction"] = str(findlabel(emotion_label_arg))
@@ -112,15 +115,7 @@ def upload_file():
                 data["success"] = True
                 
             return jsonify(data)
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    '''
+
 
 
 if __name__ == "__main__":
