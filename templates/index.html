@@ -11,15 +11,18 @@
     <title>Grayscale - Start Bootstrap Theme</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> -->
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/grayscale.css" rel="stylesheet">
+    <link href="static/css/grayscale.css" rel="stylesheet">
+    <!-- <link href="{{ url_for('static', filename='css/grayscale.css') }}" rel="stylesheet"> -->
 
   </head>
 
@@ -69,7 +72,7 @@
             <p class="text-white-50">Detect human facial expression using computer vision.</p>
           </div>
         </div>
-        <img src="img/4pic.jpg" class="img-fluid" alt="">
+        <img src="static/img/4pic.jpg" class="img-fluid" alt="">
       </div>
     </section>
 
@@ -80,7 +83,7 @@
         <!-- First Row -->
         <div class="row align-items-center no-gutters mb-4 mb-lg-5">
           <div class="col-xl-8 col-lg-7">
-            <img class="img-fluid mb-3 mb-lg-0" src="img/kidbox.jpeg" alt="">
+            <img class="img-fluid mb-3 mb-lg-0" src="static/img/kidbox.jpeg" alt="">
           </div>
           <div class="col-xl-4 col-lg-5">
             <div class="featured-text text-center text-lg-left">
@@ -93,7 +96,7 @@
         <!-- Second Row -->
         <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
           <div class="col-lg-6">
-            <img class="img-fluid" src="img/500pic.jpeg" alt="">
+            <img class="img-fluid" src="static/img/500pic.jpeg" alt="">
           </div>
           <div class="col-lg-6">
             <div class="bg-black text-center h-100 project">
@@ -111,7 +114,7 @@
         <!-- Third Row -->
         <div class="row justify-content-center no-gutters">
           <div class="col-lg-6">
-            <img class="img-fluid" src="img/point of recognition.jpeg" alt="">
+            <img class="img-fluid" src="static/img/point of recognition.jpeg" alt="">
           </div>
           <div class="col-lg-6 order-lg-first">
             <div class="bg-black text-center h-100 project">
@@ -129,7 +132,7 @@
         <!-- Fourth Row -->
         <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
           <div class="col-lg-6">
-            <img class="img-fluid" src="img/helloface.jpg" alt="">
+            <img class="img-fluid" src="static/img/helloface.jpg" alt="">
           </div>
           <div class="col-lg-6">
             <div class="bg-black text-center h-100 project">
@@ -156,11 +159,10 @@
             <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
             <h2 class="text-white mb-5">Submit a picture to analyze</h2>
 
-            <form class="form-inline d-flex">
-              <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="A face here...">
-              <button type="submit" class="btn btn-primary mx-auto">Submit</button>
+            <form class="form-inline d-flex" method=post enctype=multipart/form-data action='/upload'>
+              <input type=file class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name=file placeholder="A face here...">
+              <input type='submit' class="btn btn-primary mx-auto" value='submit'>
             </form>
-
           </div>
         </div>
       </div>
@@ -234,14 +236,19 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> -->
+
 
     <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script> -->
 
     <!-- Custom scripts for this template -->
-    <script src="js/grayscale.js"></script>
+    <script src="static/js/grayscale.js"></script>
+    <!-- <script src="{{ url_for('static', filename='js/grayscale.js') }}"></script> -->
 
   </body>
 
