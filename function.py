@@ -79,3 +79,21 @@ def preprocess_input(x, v2=True):
 #     categorical = np.zeros((num_samples, num_classes))
 #     categorical[np.arange(num_samples), integer_classes] = 1
 #     return categorical
+
+
+def findlabel(result):
+    if result == 0:
+        final_prediction = 'angry'
+    elif result == 1:
+        final_prediction = 'disgust'
+    elif result == 2:
+        final_prediction = 'fear'
+    elif result == 3:
+        final_prediction = 'happy'
+    elif result == 4:
+        final_prediction = 'sad'
+    elif result == 5:
+        final_prediction = 'surprise'
+    else:
+        final_prediction = 'neutral'
+    return final_prediction

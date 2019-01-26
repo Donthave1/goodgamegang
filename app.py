@@ -15,6 +15,7 @@ from function import detect_faces
 from function import apply_offsets
 from function import load_detection_model
 from function import preprocess_input
+from function import findlabel
 
 
 # Just disables the warning, doesn't enable AVX/FMA
@@ -46,7 +47,8 @@ emotion_offsets = (20, 40)
 def prepare_image(img):
     emotion_target_size = emotion_model.input_shape[1:3]
 
-    gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    gray_image = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
+    # gray_image = cv2.cvtColor(proc_img, cv2.COLOR_BGR2GRAY)
     faces = detect_faces(detection_model, gray_image)
 
     for face_coordinates in faces:
@@ -90,7 +92,7 @@ def upload_file():
             im = image.load_img(filepath, grayscale=True)
 
             # Convert the 2D image to an array of pixel values
-            image_array = prepare_image(im)
+            image_array = prepare_image(filepath)
             print(image_array)
 
             # Get the tensorflow default graph and use it to make predictions
@@ -102,6 +104,9 @@ def upload_file():
                 data["prediction"] = str(predicted_digit)
 
                 emotion_label_arg = np.argmax(predicted_digit)
+                data["final_prediction"] = str(findlabel(emotion_label_arg))
+                
+
 
                 # indicate that the request was a success
                 data["success"] = True
