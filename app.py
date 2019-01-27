@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, render_template, request, redirect
+from flask import Flask, jsonify, render_template, request, redirect, Response
 
 import keras
 from keras.preprocessing import image
@@ -66,6 +66,16 @@ def prepare_image(img):
 
     return gray_face
 
+
+#https://github.com/miguelgrinberg/flask-video-streaming/blob/v1/camera_pi.py
+def gen():
+    """Video streaming generator function."""
+    while True:
+        rval, frame = video.read()
+        cv2.imwrite('t.jpg', frame)
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + open('t.jpg', 'rb').read() + b'\r\n')
+
 @app.route('/')
 def index_page():
     return render_template("index.html")
@@ -116,6 +126,70 @@ def upload_file():
                 
             return jsonify(data)
 
+@app.route('/video')
+def video():
+    cv2.namedWindow('frame')
+
+    emotion_offsets = (20, 40)
+
+    emotion_window = []
+
+    while(True):
+        # Capture frame-by-frame
+        video = cv2.VideoCapture(0)
+        ret, frame = video.read()
+
+        # Our operations on the frame come here
+        gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        
+        
+        faces = detection_model.detectMultiScale(gray_image, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30), flags=cv2.CASCADE_SCALE_IMAGE)
+        
+        for face_coords in faces:
+            
+            x1, x2, y1, y2 = apply_offsets(face_coords, emotion_offsets)
+            gray_face = gray_image[y1:y2, x1:x2]
+            try:
+                gray_face = cv2.resize(gray_face, (emotion_target_size))
+            except:
+                continue
+                
+            gray_face = preprocess_input(gray_face, True)
+            gray_face = np.expand_dims(gray_face, 0)
+            gray_face = np.expand_dims(gray_face, -1)
+            emotion_prediction = emotion_classifier.predict(gray_face)
+            emotion_probability = np.max(emotion_prediction)
+            emotion_label_arg = np.argmax(emotion_prediction)
+            emotion_text = emotion_labels[emotion_label_arg]
+            emotion_window.append(emotion_text)
+
+            if emotion_text == 'angry':
+                color = [255, 0, 0]
+            elif emotion_text == 'disgust':
+                color = [128, 0, 128]
+            elif emotion_text == 'fear':
+                color = [255, 255, 0]
+            elif emotion_text == 'happy':
+                color = [255, 192, 203]
+            elif emotion_text == 'sad':
+                color = [0, 0, 255]
+            elif emotion_text == 'surprise':
+                color = [0, 0, 0]
+            else:
+                color = [255, 255, 255]
+
+            draw_bounding_box(face_coords, rgb_image, color)
+            draw_text(face_coords, rgb_image, emotion_text, color)
+        
+        # Display the resulting frame
+        frame = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
+        cv2.imshow('frame', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    
 
 
 if __name__ == "__main__":
