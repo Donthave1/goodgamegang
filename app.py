@@ -18,12 +18,17 @@ from function import preprocess_input
 from function import findlabel
 
 
+from function import LazyView
+
+
 # Just disables the warning, doesn't enable AVX/FMA
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
+app.add_url_rule('/webcam',
+                 view_func=LazyView('app.py'))
 
 detection_model = None
 emotion_model = None
@@ -35,8 +40,8 @@ def load_model():
     global detection_model
     global emotion_model
     global graph
-    detection_model = load_detection_model("haarcascade_frontalface_default.xml")
-    emotion_model = keras.models.load_model("fer2013_mini_XCEPTION.119-0.65.hdf5", compile=False)
+    detection_model = load_detection_model("model/haarcascade_frontalface_default.xml")
+    emotion_model = keras.models.load_model("model/fer2013_mini_XCEPTION.119-0.65.hdf5", compile=False)
     graph = K.get_session().graph
 
 load_model()
@@ -116,6 +121,10 @@ def upload_file():
                 
             return jsonify(data)
 
+
+# @app.route('/webcam')
+# def cam_face():
+#     return face_detection
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@ import os
 import cv2
 import matplotlib.pyplot as plt
 from keras.preprocessing import image
+from werkzeug import import_string, cached_property
 
 
 def get_labels(dataset):
@@ -97,3 +98,18 @@ def findlabel(result):
     else:
         final_prediction = 'neutral'
     return final_prediction
+
+
+
+class LazyView(object):
+
+    def __init__(self, import_name):
+        self.__module__, self.__name__ = import_name.rsplit('.', 1)
+        self.import_name = import_name
+
+    @cached_property
+    def view(self):
+        return import_string(self.import_name)
+
+    def __call__(self, *args, **kwargs):
+        return self.view(*args, **kwargs)

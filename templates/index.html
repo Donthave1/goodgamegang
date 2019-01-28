@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Grayscale - Start Bootstrap Theme</title>
+    <title>Face Expression Classifier</title>
 
     <!-- Bootstrap core CSS -->
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -39,10 +39,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">Introduction</a>
+              <a class="nav-link js-scroll-trigger" href="#about">Motivation</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#projects">Resources</a>
+              <a class="nav-link js-scroll-trigger" href="#projects">Mission</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#signup">About Us</a>
@@ -56,9 +56,9 @@
     <header class="masthead">
       <div class="container d-flex h-100 align-items-center">
         <div class="mx-auto text-center">
-          <h1 class="mx-auto my-0 text-uppercase">Facial Expression Detection</h1>
-          <h2 class="text-white-50 mx-auto mt-2 mb-5">The Power of Machine Learning</h2>
-          <a href="#about" class="btn btn-primary js-scroll-trigger">Get Started</a>
+          <h1 class="mx-auto my-0 text-uppercase">How do you feel today?</h1>
+          <h2 class="text-white-50 mx-auto mt-2 mb-5">Can A Computer Tell?</h2>
+          <a href="#about" class="btn btn-primary js-scroll-trigger">Let's find out</a>
         </div>
       </div>
     </header>
@@ -68,8 +68,12 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
-            <h2 class="text-white mb-4">Project Objective</h2>
-            <p class="text-white-50">Detect human facial expression using computer vision.</p>
+            <h2 class="text-white mb-4">Motivation</h2>
+            <p class="text-white-50">
+              We are so use to reading and seen people faces that it become natural of just predict what other is thinking or feeling. 
+              But can it be done through computer vision? is it possible to have a computer to guess what the person is feeling at the time with just their facial expression? 
+              So today, our team took up this challenge and we are planning to answer it with deep learning neural network that give computer vision the ability to recognize how one feel at given moment.
+            </p>
           </div>
         </div>
         <img src="static/img/4pic.jpg" class="img-fluid" alt="">
@@ -83,12 +87,17 @@
         <!-- First Row -->
         <div class="row align-items-center no-gutters mb-4 mb-lg-5">
           <div class="col-xl-8 col-lg-7">
-            <img class="img-fluid mb-3 mb-lg-0" src="static/img/kidbox.jpeg" alt="">
+            <img class="img-fluid mb-3 mb-lg-0" src="static/img/relight.png" alt="">
           </div>
           <div class="col-xl-4 col-lg-5">
             <div class="featured-text text-center text-lg-left">
-              <h4>Place Holder 1</h4>
-              <p class="text-black-50 mb-0">Introduction: Project Objective, Motivation</p>
+              <h4>Beginning of the Journey</h4>
+              <p class="text-black-50 mb-0">
+                In order to make a machine (computer) understand to know how you feel, there are a lot of thing that we have to first teach it.
+                We need to first teach a computer to look (use webcam), then where to look (identify the target: human face) *Sometime we do caught elf lurking in the background...
+              </br >
+                A large set of human face data is necessary to feed into the program so it knows what a human face is, so <a href="https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge">Kaggle Facial Expression Recognition Challenge (FER2013)</a> fit our need.
+              </p>
             </div>
           </div>
         </div>
@@ -96,14 +105,19 @@
         <!-- Second Row -->
         <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
           <div class="col-lg-6">
-            <img class="img-fluid" src="static/img/500pic.jpeg" alt="">
+            <img class="img-fluid" src="static/img/point of recognition.jpeg" alt="">
           </div>
           <div class="col-lg-6">
             <div class="bg-black text-center h-100 project">
               <div class="d-flex h-100">
                 <div class="project-text w-100 my-auto text-center text-lg-left">
-                  <h4 class="text-white">Place Holder 2</h4>
-                  <p class="mb-0 text-white-50">Resources: Database, Pre-train model, reference.</p>
+                  <h4 class="text-white">Feeding "Emotion Model"</h4>
+                  <p class="mb-0 text-white-50">
+                    In Machine Learning term, "Model" commonly known as a collection of rules for computer to process data, other may see it as the regression data and related statistics.
+                    For our project's demonstration need, we had found a well-trained keras CNN (known as "Convolutional Nerual Network") <a href="https://github.com/oarriaga/face_classification/blob/master/trained_models/fer2013_mini_XCEPTION.119-0.65.hdf5">XCEPTION model</a> from <a href=https://mas-group.inf.h-brs.de/?page_id=622>B-IT-BOTS team</a> that has ~66% accuracy of predicting a human facial expression.
+                  </br >
+                    *Please also checkout of their <a href="https://github.com/oarriaga/face_classification/blob/master/report.pdf">publication</a> for the details of how the <a href="https://github.com/oarriaga/face_classification/blob/master/trained_models/fer2013_mini_XCEPTION.119-0.65.hdf5">model</a> was trained.
+                  </p>
                   <hr class="d-none d-lg-block mb-0 ml-0">
                 </div>
               </div>
@@ -114,14 +128,18 @@
         <!-- Third Row -->
         <div class="row justify-content-center no-gutters">
           <div class="col-lg-6">
-            <img class="img-fluid" src="static/img/point of recognition.jpeg" alt="">
+            <img class="img-fluid" src="static/img/dotface.jpeg" alt="">
           </div>
           <div class="col-lg-6 order-lg-first">
             <div class="bg-black text-center h-100 project">
               <div class="d-flex h-100">
                 <div class="project-text w-100 my-auto text-center text-lg-right">
-                  <h4 class="text-white">Place Holder 3</h4>
-                  <p class="mb-0 text-white-50">Context</p>
+                  <h4 class="text-white">Finding the "FACE"</h4>
+                  <p class="mb-0 text-white-50">
+                    There are plenty of different method/algorithm/model that are good at detecting what a human face is.
+                    We had found that what <a href="https://docs.opencv.org/3.4.1/d7/d8b/tutorial_py_face_detection.html">OpenCV Haar-Casscade Model</a> offered work the best with not only locating where the human face in a image/video, 
+                    but also very capable of reshaping/pre-processing the data source into computer best understand/digest format.
+                  </p>
                   <hr class="d-none d-lg-block mb-0 mr-0">
                 </div>
               </div>
@@ -132,41 +150,52 @@
         <!-- Fourth Row -->
         <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
           <div class="col-lg-6">
-            <img class="img-fluid" src="static/img/helloface.jpg" alt="">
+            <img class="img-fluid" src="static/img/ml1.jpg" alt="">
           </div>
           <div class="col-lg-6">
             <div class="bg-black text-center h-100 project">
               <div class="d-flex h-100">
                 <div class="project-text w-100 my-auto text-center text-lg-left">
-                  <h4 class="text-white">Place Holder 4</h4>
-                  <p class="mb-0 text-white-50">Resources: Database, Pre-train model, reference.</p>
+                  <h4 class="text-white">Making it "ALIVE"!</h4>
+                  <p class="mb-0 text-white-50">
+                    A long journey has lead us to point... 
+                    We have created a web application using Python Flask that allow user to submit an image of a human face,
+                    and the computer will be able to "detect" where the face is located at the picture then crop it out.
+                    Once it is crop and pre-process into a grayscale format, then it will pass into our Keras CNN model where the computing happen! 
+                  </br >
+                    (or call it "magic" which ever way you preferred...)
+                  </p>
                   <hr class="d-none d-lg-block mb-0 ml-0">
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
-    </section>
-
-    <!-- Signup Section -->
-    <section id="signup" class="signup-section">
+      </br >
       <div class="container">
         <div class="row">
           <div class="col-md-10 col-lg-8 mx-auto text-center">
-
-            <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-            <h2 class="text-white mb-5">Submit a picture to analyze</h2>
-
+          </div>
+        </div>
+      </div>
+      </br >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <h2 class="text-black-50 mb-5">Time to Witness Yourself!</h2>
             <form class="form-inline d-flex" method=post enctype=multipart/form-data action='/upload'>
-              <input type=file class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name=file placeholder="A face here...">
+              <input type=file class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0">
               <input type='submit' class="btn btn-primary mx-auto" value='submit'>
             </form>
           </div>
         </div>
       </div>
+      
     </section>
+
+    <!-- Team Header -->
+    <section id="signup" class="signup-section col-lg-12 md-10 mb-md-0 mx-auto signupbgimg"></section>
 
     <!-- Contact Section -->
     <section class="contact-section bg-black">
@@ -177,22 +206,11 @@
           <div class="col-md-4 mb-3 mb-md-0">
             <div class="card py-4 h-100">
               <div class="card-body text-center">
-                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                <h4 class="text-uppercase m-0">Model</h4>
-                <hr class="my-4">
-                <div class="small text-black-50">Pre-train Model</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <i class="fas fa-envelope text-primary mb-2"></i>
-                <h4 class="text-uppercase m-0">Github</h4>
+                <i class="fas fa-chalkboard-teacher text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Model Source</h4>
                 <hr class="my-4">
                 <div class="small text-black-50">
-                  <a href="#">https://github.com/Donthave1/goodgamegang</a>
+                    <a href="https://github.com/oarriaga/face_classification">Octavio Arriaga</a>
                 </div>
               </div>
             </div>
@@ -201,27 +219,42 @@
           <div class="col-md-4 mb-3 mb-md-0">
             <div class="card py-4 h-100">
               <div class="card-body text-center">
-                <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                <h4 class="text-uppercase m-0">Contact</h4>
+                <i class="fas fa-dice-d20 text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Team GoodGameGang</h4>
                 <hr class="my-4">
-                <div class="small text-black-50">group contact here</div>
+                <div class="small text-black-50">
+                  <a href="https://github.com/Donthave1/goodgamegang">GitHub</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-cogs text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">OpenCV</h4>
+                <hr class="my-4">
+                <div class="small text-black-50">
+                    <a href="https://docs.opencv.org/3.4.1/d7/d8b/tutorial_py_face_detection.html">Haar Casscade Model</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="social d-flex justify-content-center">
-          <a href="#" class="mx-2">
-            <i class="fab fa-github"></i>
+          <a href="https://www.linkedin.com/in/edward-chen-48156950/" class="mx-2">
+            <i class="fab fa-linkedin">EC</i>
           </a>
-          <a href="#" class="mx-2">
-            <i class="fab fa-github"></i>
+          <a href="https://www.linkedin.com/in/joshshigaki/" class="mx-2">
+            <i class="fab fa-linkedin">JS</i>
           </a>
-          <a href="#" class="mx-2">
-            <i class="fab fa-github"></i>
+          <a href="https://www.linkedin.com/in/yuhsul1/" class="mx-2">
+            <i class="fab fa-linkedin">PL</i>
           </a>
-          <a href="#" class="mx-2">
-            <i class="fab fa-github"></i>
+          <a href="https://www.linkedin.com/in/thomas-nakamoto-08934964/" class="mx-2">
+            <i class="fab fa-linkedin">TN</i>
           </a>
         </div>
 
