@@ -3,7 +3,6 @@
 ## Ever wonder how powerful Machine Learning is?
 ![alt text](https://raw.githubusercontent.com/Donthave1/goodgamegang/master/images/fmh.png)
 
-# [Site]()
 
 By **Team GoodGameGang**  
 Edward Chen, Josh Shigaki, Peter Liu, Thomas Nakamoto
@@ -43,17 +42,18 @@ A typical architecture of a convolutional neural network contain an input layer,
 
 
 ## 4 Step of Validation
-1. How to detect faces via computer vision:
-2. How to identify the area to perform analysis on:
-3. Transformation on the video feedback:
-4. Predict (perform machine learning):
-5. Return result transform into visual
+1. Teach machine to understand what a human face is:
+2. Teach machine how to classify a emotion:
+3. How to find/detect faces via computer vision: 
+4. How to identify the area to perform analysis on:
+5. Transformation on the image input:
+6. Predict (perform machine learning):
+7. Return result transform into visual:
 
 ## 5 The Apps
-*TBD...*  
+ 
 Hosting on Local machine using Flask  
-Hosting on Heroku  
-Hosting on AWS
+
 
 
 ## 6 About the Team

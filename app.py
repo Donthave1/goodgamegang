@@ -18,17 +18,12 @@ from function import preprocess_input
 from function import findlabel
 
 
-from function import LazyView
-
-
 # Just disables the warning, doesn't enable AVX/FMA
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
-app.add_url_rule('/webcam',
-                 view_func=LazyView('app.py'))
 
 detection_model = None
 emotion_model = None
@@ -113,18 +108,12 @@ def upload_file():
 
                 emotion_label_arg = np.argmax(predicted_digit)
                 data["final_prediction"] = str(findlabel(emotion_label_arg))
-                
-
 
                 # indicate that the request was a success
                 data["success"] = True
                 
             return jsonify(data)
 
-
-# @app.route('/webcam')
-# def cam_face():
-#     return face_detection
 
 
 if __name__ == "__main__":
