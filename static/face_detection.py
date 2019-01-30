@@ -20,7 +20,7 @@ conn = 'mongodb://localhost:27017'
 client = pymongo.MongoClient(conn)
 db = client.gggDB
 collection = db.emotion_db
-
+collection.drop()
 #Model path for model import
 emotion_model_path = 'models/fer2013_mini_XCEPTION.119-0.65.hdf5'
 cascade_model_path = 'models/haarcascade_frontalface_default.xml'
