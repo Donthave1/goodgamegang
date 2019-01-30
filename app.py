@@ -114,6 +114,10 @@ def upload_file():
                 
             return jsonify(data)
 
+@app.route("/stream")
+def streaming():
+# """Return the homepage."""
+    return render_template("stream.html")
 
 
 if __name__ == "__main__":

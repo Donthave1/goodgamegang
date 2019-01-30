@@ -42,27 +42,33 @@
 })(jQuery); // End of use strict
 
 
-function buildCharts() {
-  document.querySelector("#blackBox").addEventListener("submit", function(e){
-    e.preventDefault();    //stop form from doing default submitting
+// // function buildCharts() {
+//   document.querySelector("#blackBox").addEventListener("click", function(e){
+//     e.preventDefault();    //stop form from doing default submitting
+//     let formData = new FormData()
+//     const fileInput = document.querySelector('#fileSubmit');
+//     formData.append('picture', fileInput.files[0]);
 
-    d3.json('/upload').then(function(data) {
-      console.log(data)
+//     fetch('/upload', {
+//       method: "POST",
+//       body: formData
+//     }).then(function(data) {
+//       console.log(data)
 
-      const svgArea = d3.select("#svgArea").select("svg");
+//       // const svgArea = d3.select("#svgArea").select("svg");
 
-      // clear svg is not empty
-      if (!svgArea.empty()) {
-        svgArea.remove();
-      }
+//       // // clear svg is not empty
+//       // if (!svgArea.empty()) {
+//       //   svgArea.remove();
+//       // }
 
-      // Create an SVG wrapper, append an SVG group that will return result
-      const svg = d3
-        .select("#svgArea")
-        .append("svg")
+//       // // Create an SVG wrapper, append an SVG group that will return result
+//       // const svg = d3
+//       //   .select("#svgArea")
+//       //   .append("svg")
         
 
 
-    });
-  });
-};
+//     });
+//   });
+// // };
