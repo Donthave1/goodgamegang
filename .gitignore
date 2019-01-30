@@ -105,9 +105,12 @@ venv.bak/
 
 # add to .gitignore
 __pycache__
+__pycache__*
 .ipynb_checkpoints
 .DS_Store
 *.pyc 
 api_keys.py
 config.py
+.vscode
+.ipynb_checkpoints/
 *.csv
