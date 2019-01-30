@@ -1,12 +1,10 @@
 import os
-from flask import Flask, jsonify, render_template, request, redirect
+from flask import Flask, jsonify, render_template, request
 
 import keras
 from keras.preprocessing import image
 from keras import backend as K
 from keras.models import load_model
-
-from statistics import mode
 
 import cv2
 import numpy as np
@@ -53,9 +51,6 @@ def prepare_image(img):
     faces = detect_faces(detection_model, gray_image)
 
     for face_coordinates in faces:
-        print("@@@@@@@@@@@@@@@@@@@@ face coords 57")
-        print(face_coordinates)
-        print("@@@@@@@@@@@@@@@@@@@@ face coords 59")
 
         try:
             x1, x2, y1, y2 = apply_offsets(face_coordinates, emotion_offsets)
@@ -64,18 +59,17 @@ def prepare_image(img):
             gray_face = preprocess_input(gray_face, True)
             gray_face = np.expand_dims(gray_face, 0)
             gray_face = np.expand_dims(gray_face, -1)
+
         except ValueError:
-            print('No Face 73')
+            print('No Face ValueError line 64')
+            break
 
     try:
         no_face = False
         return gray_face
 
     except:
-        print("******No face detected 73")
         no_face = True
-        print(no_face)
-        print("******No face detected 75")
         return
 
 @app.route('/')
@@ -85,8 +79,6 @@ def index_page():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     data = {"success": "No face detected"}
-    print("does it get here 86")
-    print(no_face)
 
     if no_face is True:
         return jsonify(data)
