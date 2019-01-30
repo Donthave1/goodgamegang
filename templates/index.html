@@ -188,9 +188,9 @@
         <div class="row">
           <div class="col-md-10 col-lg-8 mx-auto text-center">
             <h2 class="text-black-50 mb-5">Time to Witness Yourself!</h2>
-            <form class="form-inline d-flex">
-              <input type="file" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name="file" id="fileSubmit">
-              <button id='blackBox' class="btn btn-primary mx-auto">Submit</button>
+            <form class="form-inline d-flex" method=post enctype=multipart/form-data action='/upload'>
+              <input type=file class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name=file>
+              <input type='submit' class="btn btn-primary mx-auto" value='submit'>
             </form>
           </div>
         </div>
