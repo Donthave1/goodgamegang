@@ -1,12 +1,10 @@
 import os
-from flask import Flask, jsonify, render_template, request, redirect
+from flask import Flask, jsonify, render_template, request
 
 import keras
 from keras.preprocessing import image
 from keras import backend as K
 from keras.models import load_model
-
-from statistics import mode
 
 import cv2
 import numpy as np
@@ -43,9 +41,10 @@ load_model()
 
 # hyper-parameters for bounding boxes shape
 emotion_offsets = (20, 40)
+no_face = None
 
 def prepare_image(img):
-    emotion_target_size = emotion_model.input_shape[1:3]
+    global no_face
 
     gray_image = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
     # gray_image = cv2.cvtColor(proc_img, cv2.COLOR_BGR2GRAY)
@@ -53,18 +52,25 @@ def prepare_image(img):
 
     for face_coordinates in faces:
 
-        x1, x2, y1, y2 = apply_offsets(face_coordinates, emotion_offsets)
-        gray_face = gray_image[y1:y2, x1:x2]
         try:
+            x1, x2, y1, y2 = apply_offsets(face_coordinates, emotion_offsets)
+            gray_face = gray_image[y1:y2, x1:x2]
             gray_face = cv2.resize(gray_face, (48,48))
-        except:
-            continue
+            gray_face = preprocess_input(gray_face, True)
+            gray_face = np.expand_dims(gray_face, 0)
+            gray_face = np.expand_dims(gray_face, -1)
 
-        gray_face = preprocess_input(gray_face, True)
-        gray_face = np.expand_dims(gray_face, 0)
-        gray_face = np.expand_dims(gray_face, -1)
+        except ValueError:
+            print('No Face ValueError line 64')
+            break
 
-    return gray_face
+    try:
+        no_face = False
+        return gray_face
+
+    except:
+        no_face = True
+        return
 
 @app.route('/')
 def index_page():
@@ -72,9 +78,12 @@ def index_page():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
-    data = {"success": False}
+    data = {"success": "No face detected"}
+
+    if no_face is True:
+        return jsonify(data)
+
     if request.method == 'POST':
-        print(request)
 
         if request.files.get('file'):
             # read the file
@@ -96,21 +105,21 @@ def upload_file():
 
             # Convert the 2D image to an array of pixel values
             image_array = prepare_image(filepath)
-            print(image_array)
 
             # Get the tensorflow default graph and use it to make predictions
             global graph
-            with graph.as_default():
+            if no_face is False:
+                with graph.as_default():
 
-                # Use the model to make a prediction
-                predicted_digit = emotion_model.predict(image_array)[0]
-                data["probabilities of all outcomes"] = str(predicted_digit)
+                    # Use the model to make a prediction
+                    predicted_digit = emotion_model.predict(image_array)[0]
+                    data["probabilities of all outcomes"] = str(predicted_digit)
 
-                emotion_label_arg = np.argmax(predicted_digit)
-                data["final_prediction"] = str(findlabel(emotion_label_arg))
+                    emotion_label_arg = np.argmax(predicted_digit)
+                    data["final_prediction"] = str(findlabel(emotion_label_arg))
 
-                # indicate that the request was a success
-                data["success"] = True
+                    # indicate that the request was a success
+                    data["success"] = True
                 
             return jsonify(data)
 
