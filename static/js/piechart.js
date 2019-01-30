@@ -1,4 +1,3 @@
-
 d3.json("/emo").then(
     function(response){
         console.log(response)
@@ -19,7 +18,9 @@ d3.json("/emo").then(
           
           var layout = {
             height: 400,
-            width: 500
+            width: 500,
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)'
           };
           
           Plotly.newPlot('myDiv', data, layout);
