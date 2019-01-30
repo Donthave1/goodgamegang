@@ -126,11 +126,14 @@ def upload_file():
                     data["success"] = True
                 
             return jsonify(data)
+    return render_template("image.html")
+
 
 @app.route("/stream")
 def streaming():
 # """Return the homepage."""
     return render_template("stream.html")
+
 @app.route("/emo")
 def emotiondata():
     #create mongodb connection
