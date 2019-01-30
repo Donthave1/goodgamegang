@@ -125,8 +125,8 @@ def upload_file():
                     # indicate that the request was a success
                     data["success"] = True
                 
-            return jsonify(data)
-    return render_template("image.html")
+            return render_template("image.html", dict=data)
+
 
 
 @app.route("/stream")
