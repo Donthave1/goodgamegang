@@ -1,23 +1,35 @@
 import os
+#Import pymongo for MongoDB setup
+import pymongo
+import datetime as dt
 try:
 	os.chdir(os.path.join(os.getcwd(), 'static'))
 	print(os.getcwd())
 except:
 	pass
 
-from function import *
+from functions import *
 from keras.models import load_model
 import pandas as pd
 import numpy as np
 import cv2
 import pprint as pp
 
+# Setting up MongoDB - currently set up as localhost, once heroku setup, we could change the conn to a web mongodb
+conn = 'mongodb://localhost:27017'
+client = pymongo.MongoClient(conn)
+db = client.gggDB
+collection = db.emotion_db
+collection.drop()
+#Model path for model import
 emotion_model_path = 'models/fer2013_mini_XCEPTION.119-0.65.hdf5'
 cascade_model_path = 'models/haarcascade_frontalface_default.xml'
 
+#loading model to classifiers
 emotion_classifier = load_model(emotion_model_path)
 face_classifier = cv2.CascadeClassifier(cascade_model_path)
 
+#Classifier input shape(48,48)
 emotion_target_size = emotion_classifier.input_shape[1:3]
 
 emotion_labels = {
@@ -36,6 +48,7 @@ video = cv2.VideoCapture(0)
 emotion_offsets = (20, 40)
 
 emotion_window = []
+
 
 while(True):
     # Capture frame-by-frame
@@ -68,18 +81,76 @@ while(True):
 
         if emotion_text == 'angry':
             color = [255, 0, 0]
+
+            #If emotion setting equals to angry, create dictionary and insert to database
+            now = str(dt.datetime.now())
+            post = {
+                "Time":now,
+                "Emotion": emotion_text
+            }
+            collection.insert_one(post)
+
+
         elif emotion_text == 'disgust':
             color = [128, 0, 128]
+            #If emotion setting equals to disgust, create dictionary and insert to database
+            now = str(dt.datetime.now())
+            post = {
+                "Time":now,
+                "Emotion": emotion_text
+            }
+            collection.insert_one(post)
+
         elif emotion_text == 'fear':
             color = [255, 255, 0]
+            #If emotion setting equals to disgust, create dictionary and insert to database
+            now = str(dt.datetime.now())
+            post = {
+                "Time":now,
+                "Emotion": emotion_text
+            }
+            collection.insert_one(post)
+
         elif emotion_text == 'happy':
             color = [255, 192, 203]
+            #If emotion setting equals to disgust, create dictionary and insert to database
+            now = str(dt.datetime.now())
+            post = {
+                "Time":now,
+                "Emotion": emotion_text
+            }
+            collection.insert_one(post)
+
         elif emotion_text == 'sad':
             color = [0, 0, 255]
+            #If emotion setting equals to disgust, create dictionary and insert to database
+            now = str(dt.datetime.now())
+            post = {
+                "Time":now,
+                "Emotion": emotion_text
+            }
+            collection.insert_one(post)
+
+
         elif emotion_text == 'surprise':
             color = [0, 0, 0]
+            #If emotion setting equals to disgust, create dictionary and insert to database
+            now = str(dt.datetime.now())
+            post = {
+                "Time":now,
+                "Emotion": emotion_text
+            }
+            collection.insert_one(post)
+
         else:
             color = [255, 255, 255]
+            #If emotion setting equals to disgust, create dictionary and insert to database
+            now = str(dt.datetime.now())
+            post = {
+                "Time":now,
+                "Emotion": "neutral"
+            }
+            collection.insert_one(post)
 
         draw_bounding_box(face_coords, rgb_image, color)
         draw_text(face_coords, rgb_image, emotion_text, color)

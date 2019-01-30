@@ -6,8 +6,12 @@ from keras.preprocessing import image
 from keras import backend as K
 from keras.models import load_model
 
+from statistics import mode
+import pymongo
+
 import cv2
 import numpy as np
+import pandas as pd
 
 from function import detect_faces
 from function import apply_offsets
@@ -127,6 +131,38 @@ def upload_file():
 def streaming():
 # """Return the homepage."""
     return render_template("stream.html")
+@app.route("/emo")
+def emotiondata():
+    #create mongodb connection
+    conn = 'mongodb://localhost:27017'
+    client = pymongo.MongoClient(conn)
+    
+    #extract to DB
+    db = client.gggDB
+    emo_collections = db.emotion_db.find()
+    df = pd.DataFrame(list(emo_collections))
+
+    count_emo = df.groupby("Emotion").count()
+    data_df = count_emo.reset_index()
+    data_df.drop(columns=["_id"])
+
+    data =[]
+
+    emotion = list(data_df["Emotion"])
+    time = list(data_df["Time"])
+
+    
+    i=0
+    while i < len(emotion):
+        emotion_info= {
+                    "Emotion Label": emotion[i],
+                    "Time": time[i],
+                    }
+        data.append(emotion_info)
+        i +=1
+    return jsonify(data)
+
+
 
 
 if __name__ == "__main__":
