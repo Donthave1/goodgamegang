@@ -158,7 +158,7 @@ def emotiondata():
     i=0
     while i < len(emotion):
         emotion_info= {
-                    "Emotion Label": emotion[i],
+                    "Emotion": emotion[i],
                     "Time": time[i],
                     }
         data.append(emotion_info)
