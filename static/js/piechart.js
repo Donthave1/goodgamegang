@@ -1,11 +1,9 @@
-url = 
 
-
-d3.json("/emo/").then({
+d3.json("/emo").then(
     function(response){
+        console.log(response)
 
         let emotion = []
-        let 
         let time = []
         
         response.forEach(function(data){
@@ -25,8 +23,5 @@ d3.json("/emo/").then({
           };
           
           Plotly.newPlot('myDiv', data, layout);
-
-
-
     }
-  })
+  )
