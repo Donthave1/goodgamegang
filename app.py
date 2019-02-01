@@ -82,9 +82,12 @@ def index_page():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
+    global no_face
     data = {"success": "No face detected"}
+    print(f'@@@@@@@@@ {no_face} line 87')
 
     if no_face is True:
+        no_face = None
         return render_template("image.html", dict=data)
 
     if request.method == 'POST':
@@ -112,6 +115,7 @@ def upload_file():
 
             # Get the tensorflow default graph and use it to make predictions
             global graph
+            print(f'###### {no_face} line 118')
             if no_face is False:
                 with graph.as_default():
 
@@ -123,8 +127,10 @@ def upload_file():
                     data["final_prediction"] = str(findlabel(emotion_label_arg))
 
                     # indicate that the request was a success
-                    data["success"] = True
-                
+                    no_face = None
+                    print(f'$$$$$$$ {no_face} line 131')
+            
+            no_face = None
             return render_template("image.html", dict=data)
 
 
