@@ -85,7 +85,7 @@ def upload_file():
     data = {"success": "No face detected"}
 
     if no_face is True:
-        return jsonify(data)
+        return render_template("image.html", dict=data)
 
     if request.method == 'POST':
 
