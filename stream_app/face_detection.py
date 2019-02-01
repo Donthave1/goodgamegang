@@ -3,7 +3,7 @@ import os
 import pymongo
 import datetime as dt
 try:
-	os.chdir(os.path.join(os.getcwd(), 'static'))
+	os.chdir(os.path.join(os.getcwd(), 'stream_app'))
 	print(os.getcwd())
 except:
 	pass
