@@ -43,17 +43,31 @@ A typical architecture of a convolutional neural network contain an input layer,
 
 ## 4 Step of Validation
 1. Teach machine to understand what a human face is:
+Import pretrained model from Casscade Classifier (Haar Cascade)
+
 2. Teach machine how to classify a emotion:
+A Pretrained emotion classifier with dataset provided by Kaggle. The classifier reads gray scale image with 48 by 48 pixel resolution.
+
 3. How to find/detect faces via computer vision: 
-4. How to identify the area to perform analysis on:
-5. Transformation on the image input:
-6. Predict (perform machine learning):
-7. Return result transform into visual:
+Using pretrained model with cascade classifier.detectMultiScale, it read the entire image, and capture pixels that has the human faces components. It crops the bottom left Corner and the width and height of the detected object.
+
+4. How to identify the area to perform analysis and transform the data:
+After capturing the face, we changed the image to gray scale, so we can compare the image at a normalized environment. The image must also be resize from your high resolution camera to 48 pixel by 48 pixel. The image information must also be digitalized so the the model could understand the image. First adding an array (Portfolio) to the pixels so the machine knows there's one image of 48 by 48 passing in. Then reshape with axis=-1 to tell the machine, each pixel has only 1 component, which is range by 0-255 for gray scale.
+
+The pixel is also normalized by dividing 255 so machine can compare facial features without noise.
+
+5. Predict (perform machine learning):
+By inputing the (1,48,48,1) array into the Keras model, we are capable of computing the likelihood of our subject's emotion.
+
+6. Return result transform into visual:
+For image analysis, return the emotion with highest likelihood.
+
+For video analysis, store all highest likelihood emotion in the database and graph all identified emotion as a pie chart
 
 ## 5 The Apps
  
-Hosting on Local machine using Flask  
-
+Hosting on Local machine using Flask with video application as a separate app.
+The separate application updates a local database that will provide information for graphing on Flask.
 
 
 ## 6 About the Team
