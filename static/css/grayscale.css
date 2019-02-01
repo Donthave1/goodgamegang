@@ -308,6 +308,10 @@ footer {
   background-image: url('/static/img/ml4.jpg');
 }
 
+.facebgm {
+  background-image: url('/static/img/many-faces.jpg');
+}
+
 .emojiji {
   width: 100%;
   height: 100%;
